@@ -55,7 +55,10 @@ function rewriteBody(body) {
     .replace(/\/\/web\.wechat\.com/g, `//${PROXY_HOST}`)
 
     // 4. 移除 frame-busting 防嵌跳出脚本
-    .replace(/if\s*\(\s*window\.top\s*!==\s*window\.self\s*\)\s*\{[^}]*\}/g, '/* frame-buster removed */');
+    .replace(/if\s*\(\s*window\.top\s*!==\s*window\.self\s*\)\s*\{[^}]*\}/g, '/* frame-buster removed */')
+
+    // 5. 隐藏底部语言、隐私条款与版权信息
+    .replace(/<\/head>/i, '<style>.lang, .copyright, p.copyright { display: none !important; }</style></head>');
 }
 
 // ── 代理中间件工厂 ──────────────────────────────────────────
