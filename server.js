@@ -4,16 +4,16 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ── 目标域名映射 ──────────────────────────────────────────
+// ── 目标域名映射（国际版域名，Railway海外服务器可访问）──────
 const DOMAIN_MAP = {
   '/wx-res':    'https://res.wx.qq.com',
-  '/wx-login':  'https://login.wx.qq.com',
+  '/wx-login':  'https://login.weixin.qq.com',
   '/wx-long':   'https://long.web.wechat.com',
   '/wx-webpush':'https://webpush.web.wechat.com',
   '/wx-api':    'https://api.web.wechat.com',
 };
 
-const MAIN_TARGET = 'https://web-weixin.qq.com';
+const MAIN_TARGET = 'https://web.wechat.com';
 const PROXY_HOST  = process.env.PROXY_HOST || 'wx.yun-ding.com';
 
 // ── 公共响应头处理 ─────────────────────────────────────────
@@ -56,8 +56,8 @@ function makeProxy(target, pathRewrite) {
       },
     },
     headers: {
-      'Referer':         'https://web-weixin.qq.com/',
-      'Origin':          'https://web-weixin.qq.com',
+      'Referer':         'https://web.wechat.com/',
+      'Origin':          'https://web.wechat.com',
       'User-Agent':      'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36',
     },
   });
